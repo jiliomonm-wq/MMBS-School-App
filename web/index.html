@@ -34,5 +34,25 @@
 </head>
 <body>
   <script src="flutter_bootstrap.js" async></script>
-</body>
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAWIFydvP2HGpuASCm7gVPUAXin2bOv9L8",
+    authDomain: "school-management-f3cb7.firebaseapp.com",
+      projectId: "school-management-f3cb7",
+        storageBucket: "school-management-f3cb7.firebasestorage.app",
+          messagingSenderId: "418536503602",
+            appId: "1:418536503602:web:1a2b47b664c069b5d8ff2b",
+              measurementId: "G-G0VMKT9JQV"
+              };
+              
+              // Initialize Firebase
+              const app = initializeApp(firebaseConfig);
+              const analytics = getAnalytics(app);</body>
 </html>
