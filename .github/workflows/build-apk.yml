@@ -10,6 +10,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    # Flutter project ရှိနေသည့် folder ဆီ ညွှန်ပေးခြင်း
+    defaults:
+      run:
+        working-directory: 'School Managements PJ Version 1/School-Management'
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -29,6 +34,9 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Make gradlew executable
+        run: chmod +x android/gradlew
+
       - name: Build APK
         run: flutter build apk --release
 
@@ -36,4 +44,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: app-release-apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+          path: 'School Managements PJ Version 1/School-Management/build/app/outputs/flutter-apk/app-release.apk'
