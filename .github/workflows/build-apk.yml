@@ -1,0 +1,42 @@
+name: Build Flutter APK
+
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch: # Actions tab ကနေ ကိုယ်တိုင် ခလုတ်နှိပ်ပြီး build လုပ်ခွင့်ပေးခြင်း
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Code များကို ရယူခြင်း
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Java Setup လုပ်ခြင်း
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      # Flutter Setup လုပ်ခြင်း
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      # Dependencies ဒေါင်းလုဒ်ဆွဲခြင်း
+      - name: Install dependencies
+        run: flutter pub get
+
+      # APK Build လုပ်ခြင်း
+      - name: Build APK
+        run: flutter build apk --release
+
+      # ထွက်လာသော APK ဖိုင်ကို GitHub ပေါ် တင်ပေးခြင်း
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release
+          path: build/app/outputs/flutter-apk/app-release.apk
